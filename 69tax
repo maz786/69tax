@@ -12,46 +12,56 @@ with open('h8tax.csv', 'r') as csv_file:
         method = row[0]
         methods.append(method)
 
-# Print a prompt asking the user how they would like to save on tax today
-print("How would you like to save on tax today?")
+# Set the flag variable to True to start the game
+game_running = True
 
-# Display the list of tax avoidance methods
-for i, method in enumerate(methods):
-    print(f"{i+1}. {method}")
+while game_running:
+    # Print a prompt asking the user how they would like to save on tax today
+    print("How would you like to save on tax today?")
 
-# Get the user's selection
-selection = int(input("Enter the number of the method you want to learn more about: "))
+    # Display the list of tax avoidance methods
+    for i, method in enumerate(methods):
+        print(f"{i+1}. {method}")
 
-# Get the selected method and its information
-selected_method = methods[selection-1]
-example = ""
-consequences = ""
-additional_info = ""
-legislation = ""
-solutions = ""
-companies = ""
+    # Get the user's selection
+    selection = int(input("Enter the number of the method you want to learn more about: "))
 
-# Read the CSV file again
-with open('h8tax.csv', 'r') as csv_file:
-    reader = csv.reader(csv_file)
-    # Skip the header row
-    next(reader)
+    # Get the selected method and its information
+    selected_method = methods[selection-1]
+    example = ""
+    consequences = ""
+    additional_info = ""
+    legislation = ""
+    solutions = ""
+    companies = ""
 
-    # Find the row with the selected method
-    for row in reader:
-        if row[0] == selected_method:
-            example = row[1]
-            consequences = row[2]
-            additional_info = row[3]
-            legislation = row[4]
-            solutions = row[5]
-            companies = row[6]
+    # Read the CSV file again
+    with open('h8tax.csv', 'r') as csv_file:
+        reader = csv.reader(csv_file)
+        # Skip the header row
+        next(reader)
 
-# Display the information about the selected method in a paragraph format
-print(f"Method: {selected_method}")
-print(f"Example: {example}")
-print(f"Potential Consequences: {consequences}")
-print(f"Additional Information: {additional_info}")
-print(f"Relevant Legislation: {legislation}")
-print(f"Potential Solutions: {solutions}")
-print(f"Examples of Companies Involved in Tax Avoidance Scandals: {companies}")
+        # Find the row with the selected method
+        for row in reader:
+            if row[0] == selected_method:
+                example = row[1]
+                consequences = row[2]
+                additional_info = row[3]
+                legislation = row[4]
+                solutions = row[5]
+                companies = row[6]
+
+    # Display the information about the selected method in a paragraph format
+    print(f"Method: {selected_method}")
+    print(f"Example: {example}")
+    print(f"Potential Consequences: {consequences}")
+    print(f"Additional Information: {additional_info}")
+    print(f"Relevant Legislation: {legislation}")
+    print(f"Potential Solutions: {solutions}")
+    print(f"Examples of Companies Involved in Tax Avoidance Scandals: {companies}")
+
+    # Ask the user if they want to start again or exit
+    choice = input("Enter 'S' to start again or 'E' to exit: ")
+    if choice.upper() == 'E':
+        game_running = False
+
